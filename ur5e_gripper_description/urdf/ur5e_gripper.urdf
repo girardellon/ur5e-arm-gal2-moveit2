@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot name="ur">
+
+  <transmission name="shoulder_pan_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="shoulder_pan_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="shoulder_pan_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="shoulder_lift_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="shoulder_lift_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="shoulder_lift_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="elbow_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="elbow_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="elbow_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="wrist_1_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="wrist_1_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="wrist_1_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="wrist_2_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="wrist_2_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="wrist_2_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="wrist_3_trans">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="wrist_3_joint">
+      <hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="wrist_3_motor">
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <link name="world"/>
+
+  <link name="base_link"/>
+  <link name="base_link_inertia">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 3.141592653589793"/>
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur5e/visual/base.dae"/>
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 3.141592653589793"/>
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur5e/collision/base.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="4.0"/>
+      <inertia ixx="0.00443333156" ixy="0.0" ixz="0.0" iyy="0.00443333156" iyz="0.0" izz="0.0072"/>
+    </inertial>
+  </link>
+
+  <link name="shoulder_link">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 3.141592653589793"/>
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur5e/visual/shoulder.dae"/>
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 3.141592653589793"/>
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur5e/collision/shoulder.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="3.7"/>
+      <inertia ixx="0.010267495893" ixy="0.0" ixz="0.0" iyy="0.010267495893" iyz="0.0" izz="0.00666"/>
+    </inertial>
+  </link>
+
+  <link name="upper_arm_link">
+    <visual>
+      <origin xyz="0 0 0.138" rpy="1.5707963267948966 0 -1.5707963267948966"/>
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur5e/visual/upperarm.dae"/>
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.138" rpy="1.5707963267948966 0 -1.5707963267948966"/>
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur5e/collision/upperarm.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.2125 0.0 0.138" rpy="0 1.5707963267948966 0"/>
+      <mass value="8.393"/>
+      <inertia ixx="0.1338857818623325" ixy="0.0" ixz="0.0" iyy="0.1338857818623325" iyz="0.0" izz="0.0151074"/>
+    </inertial>
+  </link>
+
+  <link name="forearm_link">
+    <visual>
+      <origin xyz="0 0 0.007" rpy="1.5707963267948966 0 -1.5707963267948966"/>
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur5e/visual/forearm.dae"/>
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.007" rpy="1.5707963267948966 0 -1.5707963267948966"/>
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur5e/collision/forearm.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="-0.1961 0.0 0.007" rpy="0 1.5707963267948966 0"/>
+      <mass value="2.275"/>
+      <inertia ixx="0.031209355099586295" ixy="0.0" ixz="0.0" iyy="0.031209355099586295" iyz="0.0" izz="0.004095"/>
+    </inertial>
+  </link>
+
+  <link name="wrist_1_link">
+    <visual>
+      <origin xyz="0 0 -0.127" rpy="1.5707963267948966 0 0"/>
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur5e/visual/wrist1.dae"/>
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.127" rpy="1.5707963267948966 0 0"/>
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur5e/collision/wrist1.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.219"/>
+      <inertia ixx="0.0025598989760400002" ixy="0.0" ixz="0.0" iyy="0.0025598989760400002" iyz="0.0" izz="0.0021942"/>
+    </inertial>
+  </link>
+
+  <link name="wrist_2_link">
+    <visual>
+      <origin xyz="0 0 -0.0997" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur5e/visual/wrist2.dae"/>
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0997" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur5e/collision/wrist2.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.219"/>
+      <inertia ixx="0.0025598989760400002" ixy="0.0" ixz="0.0" iyy="0.0025598989760400002" iyz="0.0" izz="0.0021942"/>
+    </inertial>
+  </link>
+
+  <link name="wrist_3_link">
+    <visual>
+      <origin xyz="0 0 -0.0989" rpy="1.5707963267948966 0 0"/>
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur5e/visual/wrist3.dae"/>
+      </geometry>
+      <material name="LightGrey">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 -0.0989" rpy="1.5707963267948966 0 0"/>
+      <geometry>
+        <mesh filename="package://ur_description/meshes/ur5e/collision/wrist3.stl"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <origin xyz="0.0 0.0 -0.0229" rpy="0 0 0"/>
+      <mass value="0.1879"/>
+      <inertia ixx="9.890410052167731e-05" ixy="0.0" ixz="0.0" iyy="9.890410052167731e-05" iyz="0.0" izz="0.0001321171875"/>
+    </inertial>
+  </link>
+
+  <joint name="world_joint" type="fixed">
+    <parent link="world"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <joint name="base_link-base_link_inertia" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_link_inertia"/>
+    <origin xyz="0 0 0" rpy="0 0 3.141592653589793"/>
+  </joint>
+
+  <joint name="shoulder_pan_joint" type="revolute">
+    <parent link="base_link_inertia"/>
+    <child link="shoulder_link"/>
+    <origin xyz="0 0 0.1625" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185307179586" upper="6.283185307179586" effort="150.0" velocity="3.141592653589793"/>
+    <dynamics damping="0" friction="0"/>
+  </joint>
+
+  <joint name="shoulder_lift_joint" type="revolute">
+    <parent link="shoulder_link"/>
+    <child link="upper_arm_link"/>
+    <origin xyz="0 0 0" rpy="1.570796327 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185307179586" upper="6.283185307179586" effort="150.0" velocity="3.141592653589793"/>
+    <dynamics damping="0" friction="0"/>
+  </joint>
+
+  <joint name="elbow_joint" type="revolute">
+    <parent link="upper_arm_link"/>
+    <child link="forearm_link"/>
+    <origin xyz="-0.425 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-3.141592653589793" upper="3.141592653589793" effort="150.0" velocity="3.141592653589793"/>
+    <dynamics damping="0" friction="0"/>
+  </joint>
+
+  <joint name="wrist_1_joint" type="revolute">
+    <parent link="forearm_link"/>
+    <child link="wrist_1_link"/>
+    <origin xyz="-0.3922 0 0.1333" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185307179586" upper="6.283185307179586" effort="28.0" velocity="3.141592653589793"/>
+    <dynamics damping="0" friction="0"/>
+  </joint>
+
+  <joint name="wrist_2_joint" type="revolute">
+    <parent link="wrist_1_link"/>
+    <child link="wrist_2_link"/>
+    <origin xyz="0 -0.0997 -2.044881182297852e-11" rpy="1.570796327 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185307179586" upper="6.283185307179586" effort="28.0" velocity="3.141592653589793"/>
+    <dynamics damping="0" friction="0"/>
+  </joint>
+
+  <joint name="wrist_3_joint" type="revolute">
+    <parent link="wrist_2_link"/>
+    <child link="wrist_3_link"/>
+    <origin xyz="0 0.0996 -2.042830148012698e-11" rpy="1.570796326589793 3.141592653589793 3.141592653589793"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185307179586" upper="6.283185307179586" effort="28.0" velocity="3.141592653589793"/>
+    <dynamics damping="0" friction="0"/>
+  </joint>
+
+  <link name="base"/>
+  <joint name="base_link-base_fixed_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base"/>
+    <origin xyz="0 0 0" rpy="0 0 3.141592653589793"/>
+  </joint>
+
+  <link name="flange"/>
+  <joint name="wrist_3-flange" type="fixed">
+    <parent link="wrist_3_link"/>
+    <child link="flange"/>
+    <origin xyz="0 0 0" rpy="0 -1.5707963267948966 -1.5707963267948966"/>
+  </joint>
+
+  <link name="tool0"/>
+  <joint name="flange-tool0" type="fixed">
+    <parent link="flange"/>
+    <child link="tool0"/>
+    <origin xyz="0 0 0" rpy="1.5707963267948966 0 1.5707963267948966"/>
+  </joint>
+
+  <link name="gr_base_link">
+    <inertial>
+      <origin xyz="7.34854962107373E-05 4.91777501359862E-05 0.0424495526132488" rpy="0 0 0"/>
+      <mass value="0.377123905999207"/>
+      <inertia ixx="0.000307540396731287" ixy="-2.58937492375498E-07" ixz="-6.43799804375433E-07"
+               iyy="0.0004529231000964" iyz="1.29583624940918E-05" izz="0.000219729126664532"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur5e_gripper_description/meshes/base_link.STL"/>
+      </geometry>
+      <material name="gripper_color_1">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur5e_gripper_description/meshes/base_link.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="gr_link1">
+    <inertial>
+      <origin xyz="-0.0205537726028013 0.0106165651980014 0.051337097614248" rpy="0 0 0"/>
+      <mass value="0.0298219889140745"/>
+      <inertia ixx="2.98149919149656E-05" ixy="-2.82671166592861E-10" ixz="-1.94168311352801E-09"
+               iyy="3.1521794066348E-05" iyz="-5.33477835230874E-08" izz="2.66094662679502E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur5e_gripper_description/meshes/link1.STL"/>
+      </geometry>
+      <material name="gripper_color_1">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur5e_gripper_description/meshes/link1.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="gr_b_to_l1" type="revolute">
+    <parent link="gr_base_link"/>
+    <child link="gr_link1"/>
+    <origin xyz="-0.0375 0.0205 0.0609" rpy="0 0 1.5708"/>
+    <axis xyz="-1 0 0"/>
+    <limit lower="0" upper="1.0472" effort="10" velocity="1"/>
+  </joint>
+
+  <link name="gr_finger1">
+    <inertial>
+      <origin xyz="0.000563738679013409 0.0337758666794904 -0.00655751573328261" rpy="0 0 0"/>
+      <mass value="0.0183214293899292"/>
+      <inertia ixx="2.91955064379571E-06" ixy="-3.907909717534E-07" ixz="3.03726030189771E-08"
+               iyy="1.06456783418674E-06" iyz="5.51358702009101E-08" izz="2.78778566645044E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur5e_gripper_description/meshes/finger1.STL"/>
+      </geometry>
+      <material name="gripper_color_2">
+        <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur5e_gripper_description/meshes/finger1.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="gr_l1_to_f1" type="revolute">
+    <parent link="gr_link1"/>
+    <child link="gr_finger1"/>
+    <origin xyz="-0.0136750000000002 0.00829340101189021 0.109686915808842"
+            rpy="1.5707963267949 -0.872664625997159 1.5707963267949"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="0" upper="0" effort="0" velocity="0"/>
+    <mimic joint="gr_b_to_l1" multiplier="-1" offset="0"/>
+  </joint>
+
+  <link name="gr_coupler1">
+    <inertial>
+      <origin xyz="0.00344544835936102 0.052483191065121 -0.0204953855509735" rpy="0 0 0"/>
+      <mass value="0.0141912857356995"/>
+      <inertia ixx="1.84119653760374E-05" ixy="-1.08451650934639E-06" ixz="-5.13994702636591E-11"
+               iyy="2.63494365079147E-06" iyz="2.18550056071356E-09" izz="1.62952608199251E-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur5e_gripper_description/meshes/coupler1.STL"/>
+      </geometry>
+      <material name="gripper_color_1">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur5e_gripper_description/meshes/coupler1.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="gr_b_to_c1" type="revolute">
+    <parent link="gr_base_link"/>
+    <child link="gr_coupler1"/>
+    <origin xyz="-0.0195 0.0205 0.0699" rpy="1.5708 0 3.1416"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="0" upper="0" effort="0" velocity="0"/>
+    <mimic joint="gr_b_to_l1" multiplier="1" offset="0"/>
+  </joint>
+
+  <link name="gr_coupler2">
+    <inertial>
+      <origin xyz="0.00344544835938911 -0.0524831910651041 -0.0205046144490271" rpy="0 0 0"/>
+      <mass value="0.0141912857315129"/>
+      <inertia ixx="1.84119654170656E-05" ixy="1.08451650914108E-06" ixz="5.13982428232034E-11"
+               iyy="2.63494364969281E-06" iyz="2.18551295912077E-09" izz="1.62952608613147E-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur5e_gripper_description/meshes/coupler2.STL"/>
+      </geometry>
+      <material name="gripper_color_1">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur5e_gripper_description/meshes/coupler2.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="gr_b_to_c2" type="revolute">
+    <parent link="gr_base_link"/>
+    <child link="gr_coupler2"/>
+    <origin xyz="0.0195 0.0205 0.0699" rpy="-1.5708 0 0"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="0" upper="0" effort="0" velocity="0"/>
+    <mimic joint="gr_b_to_l2" multiplier="1" offset="0"/>
+  </joint>
+
+  <link name="gr_link2">
+    <inertial>
+      <origin xyz="0.0106018083502305 -0.0512657399081428 -0.0204787900923537" rpy="0 0 0"/>
+      <mass value="0.0298219889140743"/>
+      <inertia ixx="3.15217940663475E-05" ixy="5.33477835164525E-08" ixz="2.82671166611019E-10"
+               iyy="2.66094662679496E-06" iyz="-1.94168311362777E-09" izz="2.98149919149652E-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur5e_gripper_description/meshes/link2.STL"/>
+      </geometry>
+      <material name="gripper_color_1">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur5e_gripper_description/meshes/link2.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="gr_b_to_l2" type="revolute">
+    <parent link="gr_base_link"/>
+    <child link="gr_link2"/>
+    <origin xyz="0.0375 0.0205 0.0609" rpy="-1.5708 0 0"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="0" upper="0" effort="0" velocity="0"/>
+    <mimic joint="gr_b_to_l1" multiplier="-1" offset="0"/>
+  </joint>
+
+  <link name="gr_finger2">
+    <inertial>
+      <origin xyz="0.0257982175417586 0.0221646169398035 -0.00682748426671731" rpy="0 0 0"/>
+      <mass value="0.0168683354498972"/>
+      <inertia ixx="2.13233031330755E-06" ixy="-9.81260866397316E-07" ixz="-2.27133940894173E-08"
+               iyy="1.68473674021975E-06" iyz="-5.87074179801802E-08" izz="2.78131210059902E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur5e_gripper_description/meshes/finger2.STL"/>
+      </geometry>
+      <material name="gripper_color_2">
+        <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://ur5e_gripper_description/meshes/finger2.STL"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="gr_l2_to_f2" type="revolute">
+    <parent link="gr_link2"/>
+    <child link="gr_finger2"/>
+    <origin xyz="0.00858016781026817 -0.109664856359469 -0.0134" rpy="0 0 3.1416"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="0" upper="0" effort="0" velocity="0"/>
+    <mimic joint="gr_l1_to_f1" multiplier="-1" offset="0"/>
+  </joint>
+
+  <joint name="gripper_mount" type="fixed">
+    <parent link="tool0"/>
+    <child link="gr_base_link"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+</robot>
+

@@ -1,0 +1,7 @@
+# Request part
+string command_name
+float64 command_argument
+---
+# Response part
+int32 result_enum
+float64[] return_values

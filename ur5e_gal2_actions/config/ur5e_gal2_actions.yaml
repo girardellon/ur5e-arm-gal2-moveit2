@@ -1,0 +1,29 @@
+ur5e_gal2_actions:
+  ros__parameters:
+    planning_group: "ur_with_gripper"
+    eef_link: "tool0"
+    ref_frame: "base_link"
+
+    joint_names:
+      - "shoulder_pan_joint"
+      - "shoulder_lift_joint"
+      - "elbow_joint"
+      - "wrist_1_joint"
+      - "wrist_2_joint"
+      - "wrist_3_joint"
+      - "gr_b_to_l1"
+
+    home_joint_values: [0.0, -1.57, 0.0, -1.57, 0.0, 0.0, 0.0]
+
+    grasp_joint_values: [0.0, -1.57, 0.0, -1.57, 0.0, 0.0, 1.0472]
+
+    velocity_scaling: 0.5
+    acceleration_scaling: 0.2
+    planner_id: "RRTConnect"
+    planning_pipeline_id: "ompl"
+
+    shake_angle_delta: 0.5
+    num_shakes: 6
+
+    enable_gripper: false
+
